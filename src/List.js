@@ -1,6 +1,8 @@
 import React from 'react';
 
 import Task from './Task.js';
+import { connect } from 'react-redux';
+import { updateTasks } from './actions';
 
 class List extends React.Component {
   constructor(props) {
@@ -12,6 +14,7 @@ class List extends React.Component {
   updateTask(key) {
     const tasks = this.state.tasks;
     tasks[key].done = !tasks[key].done;
+    this.props.updateTasks(tasks);
     this.setState({ tasks });
   }
 
@@ -26,4 +29,13 @@ class List extends React.Component {
   }
 }
 
-export default List;
+const mapStateToProps = state => ({ tasks: state.tasks });
+
+const mapDispatchToProps = dispatch => ({
+  updateTasks: tasks => dispatch(updateTasks(tasks))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(List);

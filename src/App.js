@@ -1,19 +1,23 @@
 import React from 'react';
 import './App.css';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import reducer from './reducers';
 
 import List from './List.js';
 
-const tasks = [
-  { name: 'Learn React', done: false },
-  { name: 'Learn CSS', done: true },
-  { name: 'Web development', done: true }
-];
+const store = createStore(
+  reducer, //
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
 function App() {
   return (
     <div className="App">
       <h1>TODO</h1>
-      <List tasks={tasks} />
+      <Provider store={store}>
+        <List />
+      </Provider>
     </div>
   );
 }
