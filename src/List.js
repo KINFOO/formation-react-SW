@@ -19,7 +19,7 @@ class List extends React.Component {
     return (
       <form>
         {this.state.tasks.map((task, index) => (
-          <Task key={`${index}`} name={`${task.name}`} done={`${task.done}`} updateTask={this.updateTask} />
+          <Task key={index} id={index} name={task.name} done={task.done} updateTask={this.updateTask} />
         ))}
       </form>
     );
